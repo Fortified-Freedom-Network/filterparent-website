@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-deep: #1E3344;
+  --color-navy: #2D4154;
+  --color-navy-light: #4A6275;
+  --color-olive: #6B8E23;
+  --color-olive-dark: #5A7A1D;
+  --color-body: #D0D5DA;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
