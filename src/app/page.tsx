@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
   useReducedMotion,
@@ -48,7 +49,7 @@ function Nav() {
           Filter<span className="text-olive">Parent</span>
         </a>
         <motion.a
-          href="https://app.filterparent.com/signup"
+          href="#waitlist"
           className="rounded-lg bg-olive px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-olive-dark"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
@@ -114,7 +115,7 @@ function Hero() {
         </motion.p>
         <motion.a
           {...useFadeUp(0.2)}
-          href="https://app.filterparent.com/signup"
+          href="#waitlist"
           className="mt-10 inline-block rounded-lg bg-olive px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-olive/20 transition-colors hover:bg-olive-dark"
           whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(107,142,35,0.35)" }}
           whileTap={{ scale: 0.97 }}
@@ -408,7 +409,7 @@ function Pricing() {
               </ul>
 
               <motion.a
-                href="https://app.filterparent.com/signup"
+                href="#waitlist"
                 className={`mt-8 block rounded-lg py-3 text-center font-semibold transition-colors ${
                   p.featured
                     ? "bg-olive text-white hover:bg-olive-dark"
@@ -427,6 +428,188 @@ function Pricing() {
             </motion.div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Waitlist ─── */
+const sources = [
+  "TikTok",
+  "Instagram",
+  "Facebook",
+  "Friend/Family",
+  "Attorney/Advocate",
+  "DV Shelter",
+  "Other",
+];
+
+function Waitlist() {
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      source: (form.elements.namedItem("source") as HTMLSelectElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        setError(json.error || "Something went wrong.");
+        setLoading(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <section id="waitlist" className="relative py-24">
+      {/* Smooth top transition */}
+      <div className="pointer-events-none absolute -top-24 left-0 h-24 w-full bg-gradient-to-b from-navy to-navy-deep" />
+
+      <div className="mx-auto max-w-xl px-6 text-center">
+        <motion.h2
+          {...useFadeUp()}
+          className="text-3xl font-bold text-white sm:text-4xl"
+        >
+          Be One of the First
+        </motion.h2>
+        <motion.p
+          {...useFadeUp(0.1)}
+          className="mt-4 text-lg text-body"
+        >
+          Join the waitlist. The first 100 people get early access to
+          FilterParent.
+        </motion.p>
+
+        <AnimatePresence mode="wait">
+          {submitted ? (
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="mt-12 flex flex-col items-center gap-4"
+            >
+              <motion.svg
+                className="h-16 w-16 text-olive"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <motion.path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                />
+              </motion.svg>
+              <p className="text-xl font-semibold text-white">
+                You&apos;re on the list!
+              </p>
+              <p className="text-body">We&apos;ll be in touch soon.</p>
+            </motion.div>
+          ) : (
+            <motion.form
+              key="form"
+              {...useFadeUp(0.2)}
+              onSubmit={handleSubmit}
+              className="mt-12 space-y-4 text-left"
+            >
+              <div>
+                <label htmlFor="wl-name" className="mb-1 block text-sm font-medium text-body">
+                  Name
+                </label>
+                <input
+                  id="wl-name"
+                  name="name"
+                  type="text"
+                  required
+                  className="w-full rounded-lg border border-white/10 bg-[#1E3344] px-4 py-3 text-white placeholder:text-white/30 focus:border-olive focus:outline-none focus:ring-1 focus:ring-olive"
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="wl-email" className="mb-1 block text-sm font-medium text-body">
+                  Email
+                </label>
+                <input
+                  id="wl-email"
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full rounded-lg border border-white/10 bg-[#1E3344] px-4 py-3 text-white placeholder:text-white/30 focus:border-olive focus:outline-none focus:ring-1 focus:ring-olive"
+                  placeholder="you@email.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="wl-source" className="mb-1 block text-sm font-medium text-body">
+                  How did you hear about us?{" "}
+                  <span className="text-white/30">(optional)</span>
+                </label>
+                <select
+                  id="wl-source"
+                  name="source"
+                  className="w-full rounded-lg border border-white/10 bg-[#1E3344] px-4 py-3 text-white focus:border-olive focus:outline-none focus:ring-1 focus:ring-olive"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select one…
+                  </option>
+                  {sources.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {error && (
+                <p className="text-sm text-red-400">{error}</p>
+              )}
+
+              <motion.button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded-lg bg-olive py-3 text-center font-semibold text-white transition-colors hover:bg-olive-dark disabled:opacity-60"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {loading ? "Submitting…" : "Join the Waitlist"}
+              </motion.button>
+            </motion.form>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -488,6 +671,7 @@ export default function Home() {
       <HowItWorks />
       <WhyFilterParent />
       <Pricing />
+      <Waitlist />
       <Footer />
     </>
   );
