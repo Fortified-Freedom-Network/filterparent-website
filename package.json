@@ -13,6 +13,7 @@
     "url": "git+https://github.com/Fortified-Freedom-Network/filterparent-website.git"
   },
   "dependencies": {
+    "better-sqlite3": "^12.8.0",
     "framer-motion": "^12.38.0",
     "next": "^16.2.1",
     "react": "^19.2.4",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "postcss": "^8.5.8",
