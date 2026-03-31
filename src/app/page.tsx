@@ -607,6 +607,18 @@ function Waitlist() {
               >
                 {loading ? "Submitting…" : "Join the Waitlist"}
               </motion.button>
+
+              <p className="mt-3 text-center text-xs text-body">
+                By joining, you agree to our{" "}
+                <a href="/terms" className="text-olive underline-offset-2 hover:underline">
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a href="/privacy" className="text-olive underline-offset-2 hover:underline">
+                  Privacy Policy
+                </a>
+                .
+              </p>
             </motion.form>
           )}
         </AnimatePresence>
@@ -643,10 +655,10 @@ function Footer() {
             </p>
           </div>
           <div className="flex gap-6 text-sm text-body">
-            <a href="#" className="transition hover:text-white">
+            <a href="/privacy" className="transition hover:text-white">
               Privacy Policy
             </a>
-            <a href="#" className="transition hover:text-white">
+            <a href="/terms" className="transition hover:text-white">
               Terms of Service
             </a>
             <a
