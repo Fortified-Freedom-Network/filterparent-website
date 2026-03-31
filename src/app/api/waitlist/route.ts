@@ -5,6 +5,7 @@ import fs from "node:fs";
 
 const DB_DIR = path.join(process.cwd(), "data");
 const DB_PATH = path.join(DB_DIR, "waitlist.db");
+const DISCORD_WEBHOOK_URL = process.env.DISCORD_WAITLIST_WEBHOOK || "";
 
 function getDb() {
   fs.mkdirSync(DB_DIR, { recursive: true });
@@ -23,6 +24,31 @@ function getDb() {
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+async function notifyDiscord(name: string, email: string, source: string, count: number) {
+  if (!DISCORD_WEBHOOK_URL) return;
+  try {
+    await fetch(DISCORD_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        embeds: [{
+          title: "🛡️ New Waitlist Signup!",
+          color: 0x6B8E23,
+          fields: [
+            { name: "Name", value: name, inline: true },
+            { name: "Email", value: email, inline: true },
+            { name: "Source", value: source || "Not specified", inline: true },
+          ],
+          footer: { text: `Total signups: ${count}` },
+          timestamp: new Date().toISOString(),
+        }],
+      }),
+    });
+  } catch {
+    // Best effort — don't fail the signup if Discord is down
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -62,7 +88,12 @@ export async function POST(request: Request) {
       "INSERT INTO waitlist (name, email, source, created_at) VALUES (?, ?, ?, ?)",
     ).run(name.trim(), normalizedEmail, source || "", new Date().toISOString());
 
+    const { count } = db.prepare("SELECT COUNT(*) as count FROM waitlist").get() as { count: number };
     db.close();
+
+    // Fire and forget Discord notification
+    notifyDiscord(name.trim(), normalizedEmail, source || "", count);
+
     return NextResponse.json({ message: "Success" });
   } catch {
     return NextResponse.json(
