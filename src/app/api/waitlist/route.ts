@@ -1,14 +1,25 @@
 import { NextResponse } from "next/server";
-import fs from "node:fs/promises";
+import Database from "better-sqlite3";
 import path from "node:path";
+import fs from "node:fs";
 
-const DATA_PATH = path.join(process.cwd(), "data", "waitlist.json");
+const DB_DIR = path.join(process.cwd(), "data");
+const DB_PATH = path.join(DB_DIR, "waitlist.db");
 
-interface WaitlistEntry {
-  name: string;
-  email: string;
-  source: string;
-  timestamp: string;
+function getDb() {
+  fs.mkdirSync(DB_DIR, { recursive: true });
+  const db = new Database(DB_PATH);
+  db.pragma("journal_mode = WAL");
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS waitlist (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      source TEXT DEFAULT '',
+      created_at TEXT NOT NULL
+    )
+  `);
+  return db;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,35 +47,40 @@ export async function POST(request: Request) {
       );
     }
 
-    let entries: WaitlistEntry[] = [];
-    try {
-      const raw = await fs.readFile(DATA_PATH, "utf-8");
-      entries = JSON.parse(raw);
-    } catch {
-      entries = [];
-    }
-
+    const db = getDb();
     const normalizedEmail = email.toLowerCase().trim();
 
-    if (entries.some((e) => e.email === normalizedEmail)) {
+    const existing = db.prepare("SELECT id FROM waitlist WHERE email = ?").get(normalizedEmail);
+    if (existing) {
+      db.close();
       return NextResponse.json({
         message: "You're already on the list! We'll be in touch soon.",
       });
     }
 
-    entries.push({
-      name: name.trim(),
-      email: normalizedEmail,
-      source: source || "",
-      timestamp: new Date().toISOString(),
-    });
+    db.prepare(
+      "INSERT INTO waitlist (name, email, source, created_at) VALUES (?, ?, ?, ?)",
+    ).run(name.trim(), normalizedEmail, source || "", new Date().toISOString());
 
-    await fs.writeFile(DATA_PATH, JSON.stringify(entries, null, 2) + "\n");
-
+    db.close();
     return NextResponse.json({ message: "Success" });
   } catch {
     return NextResponse.json(
       { error: "Something went wrong. Please try again." },
+      { status: 500 },
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const db = getDb();
+    const entries = db.prepare("SELECT * FROM waitlist ORDER BY created_at DESC").all();
+    db.close();
+    return NextResponse.json(entries);
+  } catch {
+    return NextResponse.json(
+      { error: "Something went wrong." },
       { status: 500 },
     );
   }
