@@ -508,30 +508,14 @@ function Waitlist() {
           {submitted ? (
             <motion.div
               key="success"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               className="mt-12 flex flex-col items-center gap-4"
             >
-              <motion.svg
-                className="h-16 w-16 text-olive"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <motion.path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12.75l6 6 9-13.5"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                />
-              </motion.svg>
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-olive/20">
+                <span className="text-3xl">✅</span>
+              </div>
               <p className="text-xl font-semibold text-white">
                 You&apos;re on the list!
               </p>
