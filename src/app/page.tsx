@@ -304,12 +304,13 @@ const plans = [
     name: "Shield Pro",
     price: "$9.99",
     features: [
-      "Unlimited messages",
-      "Safe summaries",
+      "Unlimited filtered messages",
+      "Safe AI summaries",
       "Vault mode",
-      "Court-ready exports",
-      "Tactic labels",
+      "Tactic detection and labeling",
       "Intensity scoring",
+      "Message archiving",
+      "Reply through protected number",
     ],
   },
   {
@@ -317,20 +318,35 @@ const plans = [
     price: "$14.99",
     featured: true,
     features: [
-      "Everything in Shield Pro",
-      "AI reply rewriter",
-      "Advanced pattern analysis",
-      "Red-flag alerts",
-      "Evidence builder",
-      "Nervous system support",
+      "Everything in Shield Pro, plus:",
+      "Voice call proxy",
+      "Call recording and transcription",
+      "Speaker-labeled transcripts",
+      "MMS voice message filtering",
+      "Conversation context analysis",
+      "AI reply suggestions (coming soon)",
+    ],
+  },
+  {
+    name: "Case Builder",
+    price: "$24.99",
+    addon: true,
+    features: [
+      "Everything in Guardian Elite, plus:",
+      "Full abuse pattern analysis reports",
+      "Court-ready PDF evidence exports",
+      "Escalation timeline visualization",
+      "Attorney-ready evidence bundles",
+      "Cross-contact pattern analysis",
+      "Tactic frequency reports",
     ],
   },
 ];
 
-function CheckIcon({ delay }: { delay: number }) {
+function CheckIcon({ delay, amber = false }: { delay: number; amber?: boolean }) {
   return (
     <motion.svg
-      className="mt-0.5 h-5 w-5 shrink-0 text-olive"
+      className={`mt-0.5 h-5 w-5 shrink-0 ${amber ? "text-amber" : "text-olive"}`}
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth="2.5"
@@ -355,7 +371,7 @@ function Pricing() {
       {/* Smooth top transition */}
       <div className="pointer-events-none absolute -top-24 left-0 h-24 w-full bg-gradient-to-b from-navy-deep to-navy" />
 
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.h2
           {...useFadeUp()}
           className="text-center text-3xl font-bold text-white sm:text-4xl"
@@ -366,24 +382,28 @@ function Pricing() {
           Start with a free trial. Cancel anytime.
         </motion.p>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2">
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
           {plans.map((p, planIdx) => (
             <motion.div
               key={p.name}
-              initial={{ opacity: 0, x: planIdx === 0 ? -40 : 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: planIdx * 0.15, ease: "easeOut" }}
               whileHover={{
                 y: -4,
-                boxShadow: p.featured
-                  ? "0 20px 40px rgba(107,142,35,0.2)"
-                  : "0 20px 40px rgba(0,0,0,0.3)",
+                boxShadow: p.addon
+                  ? "0 20px 40px rgba(212,160,23,0.2)"
+                  : p.featured
+                    ? "0 20px 40px rgba(107,142,35,0.2)"
+                    : "0 20px 40px rgba(0,0,0,0.3)",
               }}
               className={`relative rounded-2xl border p-8 transition-colors ${
-                p.featured
-                  ? "border-olive bg-navy-deep shadow-lg shadow-olive/10"
-                  : "border-white/10 bg-navy-deep"
+                p.addon
+                  ? "border-amber bg-navy-deep shadow-lg shadow-amber/10"
+                  : p.featured
+                    ? "border-olive bg-navy-deep shadow-lg shadow-olive/10"
+                    : "border-white/10 bg-navy-deep"
               }`}
             >
               {p.featured && (
@@ -391,18 +411,25 @@ function Pricing() {
                   Most Popular
                 </span>
               )}
-              <h3 className="text-xl font-bold text-white">{p.name}</h3>
+              {p.addon && (
+                <span className="absolute -top-3 left-6 rounded-full bg-amber px-3 py-1 text-xs font-semibold text-white">
+                  Add-on
+                </span>
+              )}
+              <h3 className={`text-xl font-bold ${p.addon ? "text-amber" : "text-white"}`}>
+                {p.name}
+              </h3>
               <p className="mt-2">
-                <span className="text-4xl font-extrabold text-white">
+                <span className={`text-4xl font-extrabold ${p.addon ? "text-amber" : "text-white"}`}>
                   {p.price}
                 </span>
-                <span className="text-body">/mo</span>
+                <span className="text-body">/mo{p.addon ? " add-on" : ""}</span>
               </p>
 
               <ul className="mt-8 space-y-3">
                 {p.features.map((f, fi) => (
                   <li key={f} className="flex items-start gap-3 text-body">
-                    <CheckIcon delay={0.3 + fi * 0.06} />
+                    <CheckIcon delay={0.3 + fi * 0.06} amber={!!p.addon} />
                     {f}
                   </li>
                 ))}
@@ -411,15 +438,19 @@ function Pricing() {
               <motion.a
                 href="#waitlist"
                 className={`mt-8 block rounded-lg py-3 text-center font-semibold transition-colors ${
-                  p.featured
-                    ? "bg-olive text-white hover:bg-olive-dark"
-                    : "border border-olive text-olive hover:bg-olive hover:text-white"
+                  p.addon
+                    ? "bg-amber text-white hover:bg-amber-dark"
+                    : p.featured
+                      ? "bg-olive text-white hover:bg-olive-dark"
+                      : "border border-olive text-olive hover:bg-olive hover:text-white"
                 }`}
                 whileHover={{
                   scale: 1.03,
-                  ...(p.featured
-                    ? { boxShadow: "0 0 24px rgba(107,142,35,0.35)" }
-                    : {}),
+                  ...(p.addon
+                    ? { boxShadow: "0 0 24px rgba(212,160,23,0.35)" }
+                    : p.featured
+                      ? { boxShadow: "0 0 24px rgba(107,142,35,0.35)" }
+                      : {}),
                 }}
                 whileTap={{ scale: 0.97 }}
               >
