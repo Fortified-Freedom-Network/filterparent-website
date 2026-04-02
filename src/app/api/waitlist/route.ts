@@ -104,7 +104,7 @@ function buildConfirmationEmail(name: string): string {
 <!-- CTA -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
 <tr><td align="center" style="padding-bottom:32px;">
-  <a href="https://app.filterparent.com" target="_blank" style="display:inline-block;padding:14px 36px;background-color:#6B8E23;color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;border-radius:6px;">Create Your Account</a>
+  <p style="display:inline-block;padding:14px 36px;background-color:rgba(107,142,35,0.15);color:#6B8E23;font-size:16px;font-weight:700;border-radius:6px;border:1px solid #6B8E23;">We&#39;ll send you a link to create your account a few days before launch.</p>
 </td></tr>
 </table>
 
