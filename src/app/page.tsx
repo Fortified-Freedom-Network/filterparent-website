@@ -608,22 +608,12 @@ function Waitlist() {
                 </p>
                 <div className="flex justify-center gap-4">
                   <a
-                    href="#"
-                    className="rounded-lg border border-white/10 px-4 py-2 text-sm text-body transition-colors hover:border-olive hover:text-white"
-                  >
-                    Instagram
-                  </a>
-                  <a
-                    href="#"
+                    href="https://www.tiktok.com/@fortified.freedom"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="rounded-lg border border-white/10 px-4 py-2 text-sm text-body transition-colors hover:border-olive hover:text-white"
                   >
                     TikTok
-                  </a>
-                  <a
-                    href="#"
-                    className="rounded-lg border border-white/10 px-4 py-2 text-sm text-body transition-colors hover:border-olive hover:text-white"
-                  >
-                    Facebook
                   </a>
                 </div>
               </div>
