@@ -43,15 +43,17 @@ function buildConfirmationEmail(name: string): string {
 <body style="margin:0;padding:0;background-color:#0F2027;font-family:Arial,Helvetica,sans-serif;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0F2027;">
 <tr><td align="center" style="padding:24px 16px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#1a2f38;border-radius:8px;overflow:hidden;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#1E3344;border-radius:8px;overflow:hidden;">
 
 <!-- Header -->
-<tr><td style="background:linear-gradient(135deg,#0F2027,#1a3a2a);padding:40px 32px 24px;text-align:center;">
-  <h1 style="margin:0;font-size:28px;color:#6B8E23;font-weight:700;">Welcome to the FilterParent Beta!</h1>
+<tr><td style="background-color:#0F2027;padding:40px 32px 24px;text-align:center;border-bottom:1px solid rgba(107,142,35,0.3);">
+  <img src="https://filterparent.com/images/logo.png" alt="FilterParent" width="48" height="48" style="display:block;margin:0 auto 16px;" />
+  <h1 style="margin:0;font-size:26px;color:#ffffff;font-weight:800;letter-spacing:-0.5px;">Filter<span style="color:#6B8E23;">Parent</span></h1>
+  <p style="margin:12px 0 0;font-size:18px;color:#6B8E23;font-weight:600;">Welcome to the Beta!</p>
 </td></tr>
 
 <!-- Body -->
-<tr><td style="padding:32px;color:#e0e0e0;font-size:15px;line-height:1.7;">
+<tr><td style="padding:32px;color:#D0D5DA;font-size:15px;line-height:1.7;">
 
 <p style="margin:0 0 20px;color:#ffffff;font-size:16px;">Hi ${name},</p>
 
@@ -61,19 +63,19 @@ function buildConfirmationEmail(name: string): string {
 <h2 style="margin:0 0 16px;font-size:20px;color:#6B8E23;">Beta Rounds Overview</h2>
 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
-<tr><td style="padding:14px 16px;background-color:#162a32;border-left:3px solid #6B8E23;border-radius:4px;margin-bottom:8px;">
+<tr><td style="padding:14px 16px;background-color:#0F2027;border-left:3px solid #6B8E23;border-radius:4px;margin-bottom:8px;">
   <strong style="color:#6B8E23;">Round 1 &mdash; April 13th (25&ndash;100 testers)</strong><br>
-  <span style="color:#cccccc;">Free access. AI-generated messages (texts, voice memos, calls). Bring friends to test with. Accounts reset after.</span>
+  <span style="color:#D0D5DA;">Free access. AI-generated messages (texts, voice memos, calls). Bring friends to test with. Accounts reset after.</span>
 </td></tr>
 <tr><td style="height:8px;"></td></tr>
-<tr><td style="padding:14px 16px;background-color:#162a32;border-left:3px solid #6B8E23;border-radius:4px;">
+<tr><td style="padding:14px 16px;background-color:#0F2027;border-left:3px solid #6B8E23;border-radius:4px;">
   <strong style="color:#6B8E23;">Round 2 &mdash; ~2 weeks after Round 1 (100&ndash;300 testers)</strong><br>
-  <span style="color:#cccccc;">Same setup, incorporating Round 1 feedback. Accounts reset after.</span>
+  <span style="color:#D0D5DA;">Same setup, incorporating Round 1 feedback. Accounts reset after.</span>
 </td></tr>
 <tr><td style="height:8px;"></td></tr>
-<tr><td style="padding:14px 16px;background-color:#162a32;border-left:3px solid #6B8E23;border-radius:4px;">
+<tr><td style="padding:14px 16px;background-color:#0F2027;border-left:3px solid #6B8E23;border-radius:4px;">
   <strong style="color:#6B8E23;">Round 3 &mdash; ~2 weeks after Round 2 (Paid beta)</strong><br>
-  <span style="color:#cccccc;">Keep your number. Use with real contacts. Permanent beta discount: Shield Pro $7.99/mo, Guardian Elite $9.99/mo (locked forever).</span>
+  <span style="color:#D0D5DA;">Keep your number. Use with real contacts. Permanent beta discount: Shield Pro $7.99/mo, Guardian Elite $9.99/mo (locked forever).</span>
 </td></tr>
 </table>
 
@@ -85,7 +87,7 @@ function buildConfirmationEmail(name: string): string {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
 <tr><td style="padding:16px;background-color:#2a1a1a;border:1px solid #8B0000;border-radius:6px;">
   <strong style="color:#ff6b6b;font-size:15px;">&#9888; Important</strong>
-  <p style="margin:8px 0 0;color:#e0e0e0;">Do <strong>NOT</strong> give your FilterParent number to anyone in real life during Rounds 1 and 2. Simulated contacts only.</p>
+  <p style="margin:8px 0 0;color:#D0D5DA;">Do <strong>NOT</strong> give your FilterParent number to anyone in real life during Rounds 1 and 2. Simulated contacts only.</p>
 </td></tr>
 </table>
 
@@ -93,7 +95,7 @@ function buildConfirmationEmail(name: string): string {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
 <tr><td style="padding:16px;background-color:#1a2a20;border:1px solid #6B8E23;border-radius:6px;">
   <strong style="color:#6B8E23;font-size:15px;">&#128154; Emotional Safety</strong>
-  <p style="margin:8px 0 0;color:#e0e0e0;">Some messages may feel realistic and could be triggering. You can pause or stop the simulation anytime. Your safety matters more than participation.</p>
+  <p style="margin:8px 0 0;color:#D0D5DA;">Some messages may feel realistic and could be triggering. You can pause or stop the simulation anytime. Your safety matters more than participation.</p>
 </td></tr>
 </table>
 
@@ -111,10 +113,12 @@ function buildConfirmationEmail(name: string): string {
 </td></tr>
 
 <!-- Footer -->
-<tr><td style="padding:24px 32px;background-color:#0a1a20;text-align:center;border-top:1px solid #1a3a3a;">
-  <p style="margin:0 0 8px;color:#888888;font-size:13px;">Questions? Reply to this email.</p>
-  <p style="margin:0 0 16px;color:#888888;font-size:13px;">Follow us on TikTok <a href="https://www.tiktok.com/@fortified.freedom" style="color:#6B8E23;text-decoration:none;">@fortified.freedom</a></p>
-  <p style="margin:0;color:#6B8E23;font-size:14px;font-weight:600;">&mdash; The FilterParent Team</p>
+<tr><td style="padding:24px 32px;background-color:#0F2027;text-align:center;border-top:1px solid #1a3a3a;">
+  <p style="margin:0 0 8px;color:#8A9BA8;font-size:13px;">Questions? Reply to this email.</p>
+  <p style="margin:0 0 16px;color:#8A9BA8;font-size:13px;">Follow us on TikTok <a href="https://www.tiktok.com/@fortified.freedom" style="color:#6B8E23;text-decoration:none;">@fortified.freedom</a></p>
+  <p style="margin:0 0 12px;color:#6B8E23;font-size:14px;font-weight:600;">&mdash; The FilterParent Team</p>
+  <p style="margin:0;color:#8A9BA8;font-size:12px;">A <a href="https://fortifiedfreedomnetwork.com" style="color:#6B8E23;text-decoration:none;">Fortified Freedom Network</a> product</p>
+  <p style="margin:8px 0 0;color:#8A9BA8;font-size:11px;">&copy; 2026 FilterParent. All rights reserved.</p>
 </td></tr>
 
 </table>
