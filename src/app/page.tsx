@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState, type FormEvent } from "react";
 import {
   motion,
-  AnimatePresence,
+
   useScroll,
   useTransform,
   useReducedMotion,
@@ -510,7 +510,7 @@ function Waitlist() {
       }
 
       setSubmitted(true);
-    } catch {
+    } catch (_) {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -645,7 +645,7 @@ function Waitlist() {
                       } else {
                         await navigator.clipboard.writeText(window.location.origin);
                       }
-                    } catch {
+                    } catch (_) {
                       // User cancelled or API unavailable
                     }
                   }}
@@ -659,9 +659,7 @@ function Waitlist() {
               </div>
             </div>
           ) : (
-            <motion.form
-              key="form"
-              {...useFadeUp(0.2)}
+            <form
               onSubmit={handleSubmit}
               className="mt-12 space-y-4 text-left"
             >
@@ -719,15 +717,13 @@ function Waitlist() {
                 <p className="text-sm text-red-400">{error}</p>
               )}
 
-              <motion.button
+              <button
                 type="submit"
                 disabled={loading}
                 className="w-full rounded-lg bg-olive py-3 text-center font-semibold text-white transition-colors hover:bg-olive-dark disabled:opacity-60"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
               >
                 {loading ? "Submitting…" : "Join the Waitlist"}
-              </motion.button>
+              </button>
 
               <p className="mt-3 text-center text-xs text-body">
                 By joining, you agree to our{" "}
@@ -740,7 +736,7 @@ function Waitlist() {
                 </a>
                 .
               </p>
-            </motion.form>
+            </form>
           )}
         </div>
       </div>
