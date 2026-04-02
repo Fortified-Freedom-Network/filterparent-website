@@ -435,27 +435,29 @@ function Pricing() {
                 ))}
               </ul>
 
-              <motion.a
-                href="#waitlist"
-                className={`mt-8 block rounded-lg py-3 text-center font-semibold transition-colors ${
-                  p.addon
-                    ? "bg-amber text-white hover:bg-amber-dark"
-                    : p.featured
+              {p.addon ? (
+                <div className="mt-8 block rounded-lg border-2 border-dashed border-amber/40 py-3 text-center font-semibold text-amber/60">
+                  Coming Soon
+                </div>
+              ) : (
+                <motion.a
+                  href="#waitlist"
+                  className={`mt-8 block rounded-lg py-3 text-center font-semibold transition-colors ${
+                    p.featured
                       ? "bg-olive text-white hover:bg-olive-dark"
                       : "border border-olive text-olive hover:bg-olive hover:text-white"
-                }`}
-                whileHover={{
-                  scale: 1.03,
-                  ...(p.addon
-                    ? { boxShadow: "0 0 24px rgba(212,160,23,0.35)" }
-                    : p.featured
+                  }`}
+                  whileHover={{
+                    scale: 1.03,
+                    ...(p.featured
                       ? { boxShadow: "0 0 24px rgba(107,142,35,0.35)" }
                       : {}),
-                }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Start Free Trial
-              </motion.a>
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Start Free Trial
+                </motion.a>
+              )}
             </motion.div>
           ))}
         </div>
@@ -520,37 +522,149 @@ function Waitlist() {
       {/* Smooth top transition */}
       <div className="pointer-events-none absolute -top-24 left-0 h-24 w-full bg-gradient-to-b from-navy to-navy-deep" />
 
-      <div className="mx-auto max-w-xl px-6 text-center">
+      <div className="mx-auto max-w-2xl px-6">
         <motion.h2
           {...useFadeUp()}
-          className="text-3xl font-bold text-white sm:text-4xl"
+          className="text-center text-3xl font-bold text-white sm:text-4xl"
         >
-          Be One of the First
+          FilterParent Beta Program
         </motion.h2>
         <motion.p
           {...useFadeUp(0.1)}
-          className="mt-4 text-lg text-body"
+          className="mt-4 text-center text-lg text-body"
         >
-          Join the waitlist. The first 100 people get early access to
-          FilterParent.
+          We&apos;re launching FilterParent in three beta rounds to make sure we
+          get this right.
         </motion.p>
 
+        {/* Beta rounds timeline */}
+        <div className="mt-10 space-y-6">
+          {[
+            {
+              round: "Round 1",
+              date: "April 13th",
+              testers: "25–100 testers",
+              desc: "Free access to all features. You\u2019ll receive AI-generated text messages, MMS voice memos, and voice calls to test the full filtering experience. Bring friends to test with too \u2014 this round is about making sure everything works. Accounts reset after Round 1.",
+              delay: 0.15,
+            },
+            {
+              round: "Round 2",
+              date: "~2 weeks after Round 1",
+              testers: "100–300 testers",
+              desc: "After incorporating Round 1 feedback, we open the doors wider. Same setup \u2014 AI-generated content and friend testing. Not meant for real abuser contact yet. Accounts reset after Round 2.",
+              delay: 0.25,
+            },
+            {
+              round: "Round 3",
+              date: "~2 weeks after Round 2",
+              testers: "Paid beta",
+              desc: "This is the real deal. You keep your number, and you can start using FilterParent with your actual contacts. Beta testers get a permanent discounted rate as a thank you: Shield Pro at $7.99/mo and Guardian Elite at $9.99/mo (locked in forever, even after we launch publicly at full price).",
+              delay: 0.35,
+            },
+          ].map((r) => (
+            <motion.div
+              key={r.round}
+              {...useFadeUp(r.delay)}
+              className="rounded-xl border border-white/10 bg-navy/60 p-6 text-left backdrop-blur-sm"
+            >
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 className="text-lg font-bold text-olive">{r.round}</h3>
+                <span className="text-sm font-medium text-white/80">
+                  &mdash; {r.date}
+                </span>
+                <span className="rounded-full bg-olive/15 px-2.5 py-0.5 text-xs font-semibold text-olive">
+                  {r.testers}
+                </span>
+              </div>
+              <p className="mt-3 leading-relaxed text-body">{r.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Waitlist form */}
+        <div className="mt-14 text-center">
         <AnimatePresence mode="wait">
           {submitted ? (
             <motion.div
               key="success"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mt-12 flex flex-col items-center gap-4"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="mt-12 flex flex-col items-center gap-6 rounded-2xl border border-olive/20 bg-navy/60 p-8 backdrop-blur-sm sm:p-10"
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-olive/20">
-                <span className="text-3xl">✅</span>
-              </div>
-              <p className="text-xl font-semibold text-white">
-                You&apos;re on the list!
+              <motion.div
+                className="flex h-20 w-20 items-center justify-center rounded-full bg-olive/20"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.2 }}
+              >
+                <svg className="h-10 w-10 text-olive" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </motion.div>
+
+              <h3 className="text-2xl font-bold text-white sm:text-3xl">
+                You&apos;re in!
+              </h3>
+              <p className="max-w-md leading-relaxed text-body">
+                We&apos;ll email you before Round 1 kicks off on{" "}
+                <span className="font-semibold text-white">April 13th</span>{" "}
+                with everything you need to get started.
               </p>
-              <p className="text-body">We&apos;ll be in touch soon.</p>
+
+              <div className="mt-2 w-full border-t border-white/10 pt-6">
+                <p className="mb-4 text-sm font-medium text-white/70">
+                  In the meantime, follow us for updates
+                </p>
+                <div className="flex justify-center gap-4">
+                  <a
+                    href="#"
+                    className="rounded-lg border border-white/10 px-4 py-2 text-sm text-body transition-colors hover:border-olive hover:text-white"
+                  >
+                    Instagram
+                  </a>
+                  <a
+                    href="#"
+                    className="rounded-lg border border-white/10 px-4 py-2 text-sm text-body transition-colors hover:border-olive hover:text-white"
+                  >
+                    TikTok
+                  </a>
+                  <a
+                    href="#"
+                    className="rounded-lg border border-white/10 px-4 py-2 text-sm text-body transition-colors hover:border-olive hover:text-white"
+                  >
+                    Facebook
+                  </a>
+                </div>
+              </div>
+
+              <div className="w-full border-t border-white/10 pt-6">
+                <p className="mb-3 text-sm font-medium text-white/70">
+                  Know someone who needs FilterParent?
+                </p>
+                <motion.button
+                  type="button"
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: "FilterParent",
+                        text: "AI-powered emotional protection for high-conflict communication.",
+                        url: window.location.origin,
+                      });
+                    } else {
+                      navigator.clipboard.writeText(window.location.origin);
+                    }
+                  }}
+                  className="inline-flex items-center gap-2 rounded-lg bg-olive px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-olive-dark"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                  </svg>
+                  Tell a Friend
+                </motion.button>
+              </div>
             </motion.div>
           ) : (
             <motion.form
@@ -637,6 +751,7 @@ function Waitlist() {
             </motion.form>
           )}
         </AnimatePresence>
+        </div>
       </div>
     </section>
   );
