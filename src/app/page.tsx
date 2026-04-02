@@ -587,21 +587,16 @@ function Waitlist() {
           {submitted ? (
             <motion.div
               key="success"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
               className="mt-12 flex flex-col items-center gap-6 rounded-2xl border border-olive/20 bg-navy/60 p-8 backdrop-blur-sm sm:p-10"
             >
-              <motion.div
-                className="flex h-20 w-20 items-center justify-center rounded-full bg-olive/20"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.2 }}
-              >
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-olive/20">
                 <svg className="h-10 w-10 text-olive" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-              </motion.div>
+              </div>
 
               <h3 className="text-2xl font-bold text-white sm:text-3xl">
                 You&apos;re in!
@@ -644,15 +639,19 @@ function Waitlist() {
                 </p>
                 <motion.button
                   type="button"
-                  onClick={() => {
-                    if (navigator.share) {
-                      navigator.share({
-                        title: "FilterParent",
-                        text: "AI-powered emotional protection for high-conflict communication.",
-                        url: window.location.origin,
-                      });
-                    } else {
-                      navigator.clipboard.writeText(window.location.origin);
+                  onClick={async () => {
+                    try {
+                      if (navigator.share) {
+                        await navigator.share({
+                          title: "FilterParent",
+                          text: "AI-powered emotional protection for high-conflict communication.",
+                          url: window.location.origin,
+                        });
+                      } else {
+                        await navigator.clipboard.writeText(window.location.origin);
+                      }
+                    } catch {
+                      // User cancelled or API unavailable
                     }
                   }}
                   className="inline-flex items-center gap-2 rounded-lg bg-olive px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-olive-dark"
