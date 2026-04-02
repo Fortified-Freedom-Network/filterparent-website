@@ -583,13 +583,8 @@ function Waitlist() {
 
         {/* Waitlist form */}
         <div className="mt-14 text-center">
-        <AnimatePresence mode="wait">
-          {submitted ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+        {submitted ? (
+            <div
               className="mt-12 flex flex-col items-center gap-6 rounded-2xl border border-olive/20 bg-navy/60 p-8 backdrop-blur-sm sm:p-10"
             >
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-olive/20">
@@ -637,7 +632,7 @@ function Waitlist() {
                 <p className="mb-3 text-sm font-medium text-white/70">
                   Know someone who needs FilterParent?
                 </p>
-                <motion.button
+                <button
                   type="button"
                   onClick={async () => {
                     try {
@@ -655,16 +650,14 @@ function Waitlist() {
                     }
                   }}
                   className="inline-flex items-center gap-2 rounded-lg bg-olive px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-olive-dark"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
                 >
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                   </svg>
                   Tell a Friend
-                </motion.button>
+                </button>
               </div>
-            </motion.div>
+            </div>
           ) : (
             <motion.form
               key="form"
@@ -749,7 +742,6 @@ function Waitlist() {
               </p>
             </motion.form>
           )}
-        </AnimatePresence>
         </div>
       </div>
     </section>
