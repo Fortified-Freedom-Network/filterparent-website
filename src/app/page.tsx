@@ -324,7 +324,6 @@ const plans = [
       "Speaker-labeled transcripts",
       "MMS voice message filtering",
       "Conversation context analysis",
-      "AI reply suggestions (coming soon)",
     ],
   },
   {
