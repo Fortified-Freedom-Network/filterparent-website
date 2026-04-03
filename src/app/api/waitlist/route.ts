@@ -7,6 +7,8 @@ import nodemailer from "nodemailer";
 const DB_DIR = path.join(process.cwd(), "data");
 const DB_PATH = path.join(DB_DIR, "waitlist.db");
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WAITLIST_WEBHOOK || "";
+const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN || "";
+const SLACK_WAITLIST_CHANNEL = process.env.SLACK_WAITLIST_CHANNEL || "";
 
 const smtpTransporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "smtp.gmail.com",
@@ -166,6 +168,40 @@ async function notifyDiscord(name: string, email: string, source: string, count:
   }
 }
 
+async function notifySlack(name: string, email: string, source: string, count: number) {
+  if (!SLACK_BOT_TOKEN || !SLACK_WAITLIST_CHANNEL) return;
+  try {
+    await fetch("https://slack.com/api/chat.postMessage", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SLACK_BOT_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        channel: SLACK_WAITLIST_CHANNEL,
+        text: `🛡️ New waitlist signup: ${name} (${email})`,
+        blocks: [
+          {
+            type: "header",
+            text: { type: "plain_text", text: "🛡️ New Waitlist Signup!", emoji: true },
+          },
+          {
+            type: "section",
+            fields: [
+              { type: "mrkdwn", text: `*Name:*\n${name}` },
+              { type: "mrkdwn", text: `*Email:*\n${email}` },
+              { type: "mrkdwn", text: `*Source:*\n${source || "Not specified"}` },
+              { type: "mrkdwn", text: `*Total Signups:*\n${count}` },
+            ],
+          },
+        ],
+      }),
+    });
+  } catch {
+    // Best effort
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -210,6 +246,7 @@ export async function POST(request: Request) {
     // Fire and forget email + Discord notifications
     sendConfirmationEmail(name.trim(), normalizedEmail);
     notifyDiscord(name.trim(), normalizedEmail, source || "", count);
+    notifySlack(name.trim(), normalizedEmail, source || "", count);
 
     return NextResponse.json({ message: "Success" });
   } catch {
