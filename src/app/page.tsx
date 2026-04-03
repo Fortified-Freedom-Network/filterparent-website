@@ -455,7 +455,7 @@ function Pricing() {
                   }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Join the Beta
+                  Join the Free Beta
                 </motion.a>
               )}
             </motion.div>
