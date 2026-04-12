@@ -47,74 +47,61 @@ function buildConfirmationEmail(name: string): string {
 <tr><td align="center" style="padding:24px 16px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#1E3344;border-radius:8px;overflow:hidden;">
 
-<!-- Header -->
 <tr><td style="background-color:#0F2027;padding:40px 32px 24px;text-align:center;border-bottom:1px solid rgba(107,142,35,0.3);">
   <img src="https://filterparent.com/images/logo.png" alt="FilterParent" width="48" height="48" style="display:block;margin:0 auto 16px;" />
   <h1 style="margin:0;font-size:26px;color:#ffffff;font-weight:800;letter-spacing:-0.5px;">Filter<span style="color:#6B8E23;">Parent</span></h1>
-  <p style="margin:12px 0 0;font-size:18px;color:#6B8E23;font-weight:600;">Welcome to the Beta!</p>
+  <p style="margin:12px 0 0;font-size:18px;color:#6B8E23;font-weight:600;">Your beta access is ready</p>
 </td></tr>
 
-<!-- Body -->
 <tr><td style="padding:32px;color:#D0D5DA;font-size:15px;line-height:1.7;">
 
 <p style="margin:0 0 20px;color:#ffffff;font-size:16px;">Hi ${name},</p>
 
-<p style="margin:0 0 24px;">Thank you for signing up. You&rsquo;re now part of our beta program, and your feedback will directly shape how this tool supports survivors.</p>
+<p style="margin:0 0 24px;">Thanks for signing up for the FilterParent beta. You can create your account right now at <a href="https://app.filterparent.com" style="color:#6B8E23;text-decoration:none;font-weight:700;">app.filterparent.com</a>.</p>
 
-<!-- Beta Rounds -->
-<h2 style="margin:0 0 16px;font-size:20px;color:#6B8E23;">Beta Rounds Overview</h2>
+<h2 style="margin:0 0 12px;font-size:20px;color:#6B8E23;">How to get started</h2>
+<ol style="margin:0 0 24px;padding-left:22px;color:#D0D5DA;">
+  <li style="margin-bottom:10px;">Go to <a href="https://app.filterparent.com" style="color:#6B8E23;text-decoration:none;font-weight:700;">app.filterparent.com</a>.</li>
+  <li style="margin-bottom:10px;">Create your account with the same email address you used for the beta signup.</li>
+  <li style="margin-bottom:10px;">Verify your email and finish setting up your account.</li>
+  <li style="margin-bottom:10px;">Choose your FilterParent phone number during onboarding.</li>
+  <li>Open <strong>Settings → Simulated Contacts</strong> and activate one or more AI personas to start testing.</li>
+</ol>
+
+<h2 style="margin:0 0 12px;font-size:20px;color:#6B8E23;">About the AI personas</h2>
+<p style="margin:0 0 16px;">FilterParent includes AI-generated personas that simulate realistic high-conflict co-parenting communication. These are not real people. They are test contacts designed to help you experience how the product handles stressful texts and conversations.</p>
 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
-<tr><td style="padding:14px 16px;background-color:#0F2027;border-left:3px solid #6B8E23;border-radius:4px;margin-bottom:8px;">
-  <strong style="color:#6B8E23;">Round 1 &mdash; April 13th (25&ndash;100 testers)</strong><br>
-  <span style="color:#D0D5DA;">Free access. AI-generated messages (texts, voice memos, calls). Bring friends to test with. Accounts reset after.</span>
-</td></tr>
-<tr><td style="height:8px;"></td></tr>
-<tr><td style="padding:14px 16px;background-color:#0F2027;border-left:3px solid #6B8E23;border-radius:4px;">
-  <strong style="color:#6B8E23;">Round 2 &mdash; ~2 weeks after Round 1 (100&ndash;300 testers)</strong><br>
-  <span style="color:#D0D5DA;">Same setup, incorporating Round 1 feedback. Accounts reset after.</span>
-</td></tr>
-<tr><td style="height:8px;"></td></tr>
-<tr><td style="padding:14px 16px;background-color:#0F2027;border-left:3px solid #6B8E23;border-radius:4px;">
-  <strong style="color:#6B8E23;">Round 3 &mdash; ~2 weeks after Round 2 (Paid beta)</strong><br>
-  <span style="color:#D0D5DA;">Keep your number. Use with real contacts. Permanent beta discount: Shield Pro $7.99/mo, Guardian Elite $9.99/mo (locked forever).</span>
+<tr><td style="padding:16px;background-color:#0F2027;border-left:3px solid #6B8E23;border-radius:4px;">
+  <strong style="color:#6B8E23;">What to expect</strong>
+  <p style="margin:8px 0 0;color:#D0D5DA;">Once activated in Settings, personas can send messages that reflect common abusive or manipulative communication patterns. You can turn them on or off anytime.</p>
 </td></tr>
 </table>
 
-<!-- How It Works -->
-<h2 style="margin:0 0 12px;font-size:20px;color:#6B8E23;">How It Works</h2>
-<p style="margin:0 0 24px;">When you create your account, you&rsquo;ll choose a simulated contact (a fictional character). They&rsquo;ll send you texts, voice memos, and calls. You can reply and the AI responds in character.</p>
-
-<!-- Important -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
 <tr><td style="padding:16px;background-color:#2a1a1a;border:1px solid #8B0000;border-radius:6px;">
   <strong style="color:#ff6b6b;font-size:15px;">&#9888; Important</strong>
-  <p style="margin:8px 0 0;color:#D0D5DA;">Do <strong>NOT</strong> give your FilterParent number to anyone in real life during Rounds 1 and 2. Simulated contacts only.</p>
+  <p style="margin:8px 0 0;color:#D0D5DA;">To test the beta, you must manually activate personas in <strong>Settings → Simulated Contacts</strong>. They are off by default.</p>
 </td></tr>
 </table>
 
-<!-- Safety -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
 <tr><td style="padding:16px;background-color:#1a2a20;border:1px solid #6B8E23;border-radius:6px;">
   <strong style="color:#6B8E23;font-size:15px;">&#128154; Emotional Safety</strong>
-  <p style="margin:8px 0 0;color:#D0D5DA;">Some messages may feel realistic and could be triggering. You can pause or stop the simulation anytime. Your safety matters more than participation.</p>
+  <p style="margin:8px 0 0;color:#D0D5DA;">Some persona messages may feel realistic and could be triggering. You can pause or deactivate them at any time. Your safety matters more than participation.</p>
 </td></tr>
 </table>
 
-<!-- Next Steps -->
-<h2 style="margin:0 0 12px;font-size:20px;color:#6B8E23;">Next Steps</h2>
-<p style="margin:0 0 28px;">Set up your account before April 12th so you&rsquo;re ready for launch day.</p>
-
-<!-- CTA -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
 <tr><td align="center" style="padding-bottom:32px;">
-  <p style="display:inline-block;padding:14px 36px;background-color:rgba(107,142,35,0.15);color:#6B8E23;font-size:16px;font-weight:700;border-radius:6px;border:1px solid #6B8E23;">We&#39;ll send you a link to create your account a few days before launch.</p>
+  <a href="https://app.filterparent.com" style="display:inline-block;padding:14px 36px;background-color:#6B8E23;color:#ffffff;font-size:16px;font-weight:700;border-radius:6px;text-decoration:none;">Create Your Account</a>
 </td></tr>
 </table>
 
+<p style="margin:0;color:#D0D5DA;">If you hit anything weird, reply to this email. Beta is where we find the sharp edges before users do. Very glamorous.</p>
+
 </td></tr>
 
-<!-- Footer -->
 <tr><td style="padding:24px 32px;background-color:#0F2027;text-align:center;border-top:1px solid #1a3a3a;">
   <p style="margin:0 0 8px;color:#8A9BA8;font-size:13px;">Questions? Reply to this email.</p>
   <p style="margin:0 0 16px;color:#8A9BA8;font-size:13px;">Follow us on TikTok <a href="https://www.tiktok.com/@fortified.freedom" style="color:#6B8E23;text-decoration:none;">@fortified.freedom</a></p>
