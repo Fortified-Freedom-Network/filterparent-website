@@ -596,9 +596,9 @@ function Waitlist() {
                 You&apos;re in!
               </h3>
               <p className="max-w-md leading-relaxed text-body">
-                We&apos;ll email you before Round 1 kicks off on{" "}
-                <span className="font-semibold text-white">April 13th</span>{" "}
-                with everything you need to get started.
+                Check your email for next steps, then head to{" "}
+                <span className="font-semibold text-white">app.filterparent.com</span>{" "}
+                to create your account and start the beta.
               </p>
 
               <div className="mt-2 w-full border-t border-white/10 pt-6">
@@ -711,7 +711,7 @@ function Waitlist() {
                 disabled={loading}
                 className="w-full rounded-lg bg-olive py-3 text-center font-semibold text-white transition-colors hover:bg-olive-dark disabled:opacity-60"
               >
-                {loading ? "Submitting…" : "Join the Waitlist"}
+                {loading ? "Submitting…" : "Join the Beta"}
               </button>
 
               <p className="mt-3 text-center text-xs text-body">
