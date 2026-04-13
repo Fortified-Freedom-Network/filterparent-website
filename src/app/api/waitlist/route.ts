@@ -68,6 +68,9 @@ function buildConfirmationEmail(name: string): string {
   <li>Open <strong>Settings → Simulated Contacts</strong> and activate one or more AI personas to start testing.</li>
 </ol>
 
+<h2 style="margin:0 0 12px;font-size:20px;color:#6B8E23;">Watch the app walkthrough</h2>
+<p style="margin:0 0 20px;">If you want a quick visual walkthrough first, here’s the orientation video: <a href="https://drive.google.com/file/d/1dw635sOprWgvNIyOGBl_ObtxKgNHGf9t/view?usp=sharing" style="color:#6B8E23;text-decoration:none;font-weight:700;">Watch the app walkthrough</a>.</p>
+
 <h2 style="margin:0 0 12px;font-size:20px;color:#6B8E23;">About the AI personas</h2>
 <p style="margin:0 0 16px;">FilterParent includes AI-generated personas that simulate realistic high-conflict co-parenting communication. These are not real people. They are test contacts designed to help you experience how the product handles stressful texts and conversations.</p>
 
@@ -93,8 +96,11 @@ function buildConfirmationEmail(name: string): string {
 </table>
 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-<tr><td align="center" style="padding-bottom:32px;">
+<tr><td align="center" style="padding-bottom:16px;">
   <a href="https://app.filterparent.com" style="display:inline-block;padding:14px 36px;background-color:#6B8E23;color:#ffffff;font-size:16px;font-weight:700;border-radius:6px;text-decoration:none;">Create Your Account</a>
+</td></tr>
+<tr><td align="center" style="padding-bottom:32px;">
+  <a href="https://drive.google.com/file/d/1dw635sOprWgvNIyOGBl_ObtxKgNHGf9t/view?usp=sharing" style="display:inline-block;padding:12px 28px;background-color:#0F2027;color:#6B8E23;font-size:15px;font-weight:700;border-radius:6px;text-decoration:none;border:1px solid #6B8E23;">Watch the Walkthrough</a>
 </td></tr>
 </table>
 
